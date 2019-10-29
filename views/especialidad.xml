@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="centro.especialidad_list">
+      <field name="name">Especialidades</field>
+      <field name="model">centro.especialidad</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="nombre_e"/>
+          <field name="total_especialista"/>
+        </tree>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="centro.especialidad_form">
+            <field name="name">centro</field>
+            <field name="model">centro.especialidad</field>
+            <field name="arch" type="xml">
+                <form string="centro form">
+                    <sheet>
+                        <group>
+                            <separator string="Ingresar Especialidad" colspan="2"/>
+                            <field name="id"/>
+                            <field name="nombre_e"/>
+                            <separator string="Total de Especialistas" colspan="2"/>
+                            <field name="total_especialista"/>
+                        </group>
+                        <notebook>
+                        <page string="Especialistas">
+                            <group>
+                                <field name="especialista_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                       </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+        <record model="ir.ui.view" id="especialidad_search_view">
+          <field name="name">especialidad search</field>
+          <field name="model">centro.especialidad</field>
+          <field name="arch" type="xml">
+                <search>
+                    <field name="nombre_e"/>
+                </search>
+            </field>
+        </record>
+
+
+    
+    <record model="ir.actions.act_window" id="centro_especialidad_action_window">
+      <field name="name">Listado de Especialidades</field>    
+      <field name="res_model">centro.especialidad</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    
+    <record model="ir.actions.server" id="centro_especialidad_action_server">
+      <field name="name">especialista server</field>
+      <field name="model_id" ref="model_centro_especialidad"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    
+    <menuitem name="Listado de Especialidades" id="centro_especialidad" parent="menu_centro_4" action="centro_especialidad_action_window" 
+       groups="centro.grupo_administradores,centro.grupo_especialistas,centro.grupo_secretarias"/>
+
+  </data>
+</odoo>
+
+ 

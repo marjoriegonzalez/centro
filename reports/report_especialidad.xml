@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+        id="listado_especialidad"
+        model="centro.especialidad"
+        string="Reporte de Especialidad"
+        name="centro.report_especialidad_view"
+        file="centro.report_especialidad"
+        report_type="qweb-pdf"  />
+
+
+    <template id="report_especialidad_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="page">
+
+                            <style>
+                                table.customTable {
+                                width: 100%;
+                                background-color: #FFFFFF;
+                                border-collapse: collapse;
+                                border-width: 2px;
+                                border-color: #72C9F6;
+                                border-style: solid;
+                                color: #000000;
+                                }
+
+                                table.customTable td, table.customTable th {
+                                border-width: 2px;
+                                border-color: #72C9F6;
+                                border-style: solid;
+                                padding: 5px;
+                                }
+
+                                table.customTable thead {
+                                background-color: #72C9F6;
+                                font-family: sans-serif;
+                                }
+                            </style>
+                            <br></br>
+
+                            <thead>
+                                <center>
+                                    <h2>Reporte de Especialidad</h2>
+                                </center>
+                                <br>
+                                    <p>ID:
+                                        <span t-field="o.id"/>
+                                    </p>
+                                    <p>Nombre Especialidad:
+                                        <span t-field="o.nombre_e"/>
+                                    </p>
+                                    <p>Total de Especialista:
+                                        <span t-field="o.total_especialista"/>
+                                    </p>
+                                 <p>
+                                        <table class="customTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre Especialista</th>
+                                                    <th>Rut</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="i" t-value="1"/>
+                                                <tr t-foreach="o.especialista_ids" t-as="l">
+                                                    <td>
+                                                        <span t-field="l.nombre_es"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.rut_es"/>
+                                                    </td>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </p> 
+                                </br>
+                            </thead>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

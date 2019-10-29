@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="centro.tree_paciente_list">
+      <field name="name">Listado de Pacientes</field>
+      <field name="model">centro.paciente</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="rut"/>
+          <field name="domicilio"/>
+          <field name="nombre"/>
+          <field name="det_prevision"/>
+          <field name="fecha_nac"/>
+          <field name="det_grupo_sangre"/>
+          <field name="email"/>
+          <field name="det_alergia"/>
+          <field name="celular"/>
+          <field name="det_vacuna"/>
+          <field name="edad"/>
+          <field name="total_receta"/>    
+          <field name="total_consulta"/> 
+          <field name="total_reservap"/>       
+        </tree>
+      </field> 
+    </record>
+
+     <record model="ir.ui.view" id="centro.paciente_form">
+            <field name="name">centro</field>
+            <field name="model">centro.paciente</field>
+            <field name="arch" type="xml">
+                <form string="centro form">
+                    <sheet>
+                        <group col="4">
+                         <separator string="Ingresar Paciente" colspan="4"/>
+                          <field name="id" groups="centro.grupo_secretarias"/>
+                          <field name="domicilio" groups="centro.grupo_secretarias"/>
+                          <field name="rut" groups="centro.grupo_secretarias"/>
+                          <field name="det_prevision" groups="centro.grupo_secretarias"/>
+                          <field name="nombre" groups="centro.grupo_secretarias"/>
+                          <field name="det_grupo_sangre" groups="centro.grupo_secretarias"/> 
+                          <field name="fecha_nac"/>
+                          <field name="det_alergia"/>
+                          <field name="email"/>
+                          <field name="det_vacuna"/>
+                          <field name="celular"/>
+                          <field name="edad" groups="centro.grupo_secretarias"/>
+                         <separator string="Total" colspan="4"/>
+                          <field name="total_receta"/>
+                          <field name="total_consulta"/>
+                          <field name="total_reservap"/> 
+                        </group>
+                        <notebook>
+                        <page string="Reservas">
+                            <group>
+                                <field name="reserva_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Recetas">
+                            <group>
+                                <field name="receta_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+      
+        <record model="ir.ui.view" id="paciente_search_view">
+            <field name="name">paciente search</field>
+            <field name="model">centro.paciente</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="nombre"/>
+                    <field name="rut"/>
+                </search>
+            </field>
+        </record>
+
+    
+    <record model="ir.actions.act_window" id="centro_paciente_action_window">
+      <field name="name">Listado de Pacientes</field>    
+      <field name="res_model">centro.paciente</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+  
+    <record model="ir.actions.server" id="centro_paciente_action_server">
+      <field name="name">paciente server</field>
+      <field name="model_id" ref="model_centro_paciente"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    
+    <menuitem name="Listado de Pacientes" id="centro_paciente" parent="menu_centro_3" action="centro_paciente_action_window" 
+     groups="centro.grupo_administradores,centro.grupo_especialistas"/>
+
+  </data>
+</odoo>
+
+ 

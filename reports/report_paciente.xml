@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+        id="listado_paciente"
+        model="centro.paciente"
+        string="Reporte de Paciente"
+        name="centro.report_paciente_view"
+        file="centro.report_paciente"
+        report_type="qweb-pdf" /><!-- puede ser qweb-html o qweb-pdf -->
+
+
+    <template id="report_paciente_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="page">
+
+                            <style>
+                                table.customTable {
+                                width: 100%;
+                                background-color: #FFFFFF;
+                                border-collapse: collapse;
+                                border-width: 2px;
+                                border-color: #72C9F6;
+                                border-style: solid;
+                                color: #000000;
+                                }
+
+                                table.customTable td, table.customTable th {
+                                border-width: 2px;
+                                border-color: #72C9F6;
+                                border-style: solid;
+                                padding: 5px;
+                                }
+
+                                table.customTable thead {
+                                background-color: #72C9F6;
+                                font-family: sans-serif;
+                                }
+                            </style>
+                            <br></br>
+
+                            <thead>
+                                <center>
+                                    <h2>Reporte Paciente</h2>
+                                </center>
+                                <br>
+                                    <p>Nombre:
+                                        <span t-field="o.nombre"/>
+                                    </p>
+                                    <p>Rut:
+                                        <span t-field="o.rut"/>
+                                    </p>
+                                     <p>Fecha de Nacimiento:
+                                        <span t-field="o.fecha_nac"/>
+                                    </p>
+                                     <p>Edad:
+                                        <span t-field="o.edad"/>
+                                    </p>
+                                    <p>Domicilio:
+                                        <span t-field="o.domicilio"/>
+                                    </p>
+                                    <p>Correo Electrónico:
+                                        <span t-field="o.email"/>
+                                    </p>
+                                    <p>Celular:
+                                        <span t-field="o.celular"/>
+                                    </p>
+                                     <p>Previsión:
+                                        <span t-field="o.det_prevision"/>
+                                    </p>
+                                 <p>
+                                        <table class="customTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fechas de Reservas</th>
+                                                    <th>Especialista</th>
+                                                    <th>Estado de la Reserva</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="i" t-value="1"/>
+                                                <tr t-foreach="o.reserva_ids" t-as="l">
+                                                    <td>
+                                                        <span t-field="l.fecha"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.especialista_id"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.estado"/>
+                                                    </td>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </p> 
+                                 <p>
+                                        <table class="customTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fechas de Consultas</th>
+                                                    <th>Descripción</th>
+                                                    <th>Estado de la Consulta</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="i" t-value="1"/>
+                                                <tr t-foreach="o.consulta_ids" t-as="l">
+                                                    <td>
+                                                        <span t-field="l.reserva_id"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.det_diagnostico"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.estado"/>
+                                                    </td>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </p> 
+                                <p>
+                                        <table class="customTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Recetas</th>
+                                                    <th>Recetada por:</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="i" t-value="1"/>
+                                                <tr t-foreach="o.receta_ids" t-as="l">
+                                                    <td>
+                                                        <span t-field="l.observacion"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.especialista_id"/>
+                                                    </td>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </p> 
+                                </br>
+                            </thead>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

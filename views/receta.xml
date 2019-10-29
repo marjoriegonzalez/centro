@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="centro.tree_receta_list">
+      <field name="name">Listado de Recetas</field>
+      <field name="model">centro.receta</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="observacion"/>
+          <field name="paciente_id"/>
+          <field name="especialista_id"/>
+        </tree>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="centro.receta_form">
+            <field name="name">centro</field>
+            <field name="model">centro.receta</field>
+            <field name="arch" type="xml">
+                <form string="centro form">
+                    <sheet>
+                        <group>
+                            <separator string="Ingresar Receta" colspan="2"/>
+                            <field name="id"/>
+                            <field name="observacion"/>
+                            <field name="paciente_id"/>
+                            <field name="especialista_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="receta_search_view">
+          <field name="name">receta search</field>
+          <field name="model">centro.receta</field>
+          <field name="arch" type="xml">
+                <search>
+                    <field name="paciente_id"/>
+                    <field name="especialista_id"/>
+                </search>
+            </field>
+        </record>
+
+
+    <record model="ir.actions.act_window" id="centro_receta_action_window">
+      <field name="name">Listado de Recetas</field>    
+      <field name="res_model">centro.receta</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.server" id="centro_receta_action_server">
+      <field name="name">receta server</field>
+      <field name="model_id" ref="model_centro_receta"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    
+    <menuitem name="Listado de Recetas" id="centro_receta" parent="menu_centro_3" action="centro_receta_action_window" 
+      groups="centro.grupo_administradores,centro.grupo_especialistas,centro.grupo_secretarias"/>
+
+  </data>
+</odoo>
+
+ 

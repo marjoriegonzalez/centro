@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+        id="listado_reserva"
+        model="centro.reserva"
+        string="Reporte de Reserva"
+        name="centro.report_reserva_view"
+        file="centro.report_reserva"
+        report_type="qweb-pdf"  />
+
+
+    <template id="report_reserva_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="page">
+
+                            <style>
+                                table.customTable {
+                                width: 100%;
+                                background-color: #FFFFFF;
+                                border-collapse: collapse;
+                                border-width: 2px;
+                                border-color: #72C9F6;
+                                border-style: solid;
+                                color: #000000;
+                                }
+
+                                table.customTable td, table.customTable th {
+                                border-width: 2px;
+                                border-color: #72C9F6;
+                                border-style: solid;
+                                padding: 5px;
+                                }
+
+                                table.customTable thead {
+                                background-color: #72C9F6;
+                                font-family: sans-serif;
+                                }
+                            </style>
+                            <br></br>
+
+                            <thead>
+                                <center>
+                                    <h2>Reporte Reserva</h2>
+                                </center>
+                                <br>
+                                    <p>ID:
+                                        <span t-field="o.id"/>
+                                    </p>
+                                    <p>Fecha y Hora:
+                                        <span t-field="o.fecha"/>
+                                    </p>
+                                    <p>Paciente:
+                                        <span t-field="o.paciente_id"/>
+                                    </p>
+                                    <p>Especialista:
+                                        <span t-field="o.especialista_id"/>
+                                    </p>
+                                    <p>Estado de la Reserva:
+                                        <span t-field="o.estado"/>
+                                    </p>
+                                 <p>Consulta:
+                                        <table class="customTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Diagnóstico</th>
+                                                    <th>Estado de la Consulta</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="i" t-value="1"/>
+                                                <tr t-foreach="o.consulta_ids" t-as="l">
+                                                    <td>
+                                                        <span t-field="l.det_diagnostico"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.estado"/>
+                                                    </td>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </p> 
+                                </br>
+                            </thead>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

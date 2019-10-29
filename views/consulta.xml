@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="centro.tree_consulta_list">
+      <field name="name">Listado de Consultas</field>
+      <field name="model">centro.consulta</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="paciente_id"/>
+          <field name="reserva_id"/>
+          <field name="fecha"/>
+          <field name="det_diagnostico"/>
+          <field name="estado"/>
+        </tree>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="centro.consulta_form">
+            <field name="name">centro</field>
+            <field name="model">centro.consulta</field>
+            <field name="arch" type="xml">
+                <form string="centro form">
+                 <header>
+                    <field name="estado" widget="statusbar" clickable="True"/>
+                  </header>
+                  <sheet>
+                        <group col ="2">
+                            <separator string="Ingresar Consulta" colspan="2"/>
+                            <field name="id"/>
+                            <field name="paciente_id"/>
+                            <field name="reserva_id"/>
+                            <field name="fecha"/>
+                            <field name="det_diagnostico"/>
+                            <field name="estado" widget="statusbar" clickable="True"/>
+                        </group>
+                        <notebook>
+                        <page string="Recetas">
+                            <group>
+                                <field name="receta_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                  </sheet>
+                </form>
+            </field>
+      </record>
+
+
+      <record model="ir.ui.view" id="consulta_search_view">
+          <field name="name">consulta search</field>
+          <field name="model">centro.consulta</field>
+          <field name="arch" type="xml">
+                <search>
+                    <field name="estado"/>
+                    <field name="paciente_id"/>
+                    <field name="reserva_id"/>
+                </search>
+            </field>
+      </record>
+
+      
+    <record model="ir.actions.act_window" id="centro_consulta_action_window">
+      <field name="name">Listado de Consultas</field>   
+      <field name="res_model">centro.consulta</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.server" id="centro_consulta_action_server">
+      <field name="name">consulta server</field>
+      <field name="model_id" ref="model_centro_consulta"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    
+    <menuitem name="Listado de Consultas" id="centro_consulta" parent="menu_centro_2" action="centro_consulta_action_window"
+        groups="centro.grupo_administradores,centro.grupo_especialistas,centro.grupo_secretarias" />
+
+  </data>
+</odoo>
+
+ 

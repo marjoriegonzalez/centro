@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="centro.tree_paciente_list">
+      <field name="name">Listado</field>
+      <field name="model">centro.paciente</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="rut"/>
+          <field name="domicilio"/>
+          <field name="nombre"/>
+          <field name="det_prevision"/>
+          <field name="fecha_nac"/>
+          <field name="det_grupo_sangre"/>
+          <field name="edad"/>
+          <field name="total_receta"/>    
+          <field name="total_consulta"/> 
+          <field name="total_reservap"/>       
+        </tree>
+      </field> 
+    </record>
+
+<!--     <record model="ir.ui.view" id="centro.paciente_form">
+            <field name="name">centro</field>
+            <field name="model">centro.paciente</field>
+            <field name="arch" type="xml">
+                <form string="centro form">
+                    <sheet>
+                        <group col="4">
+                         <separator string="Ingresar Paciente" colspan="4"/>
+                          <field name="id"/>
+                          <field name="domicilio"/>
+                          <field name="rut"/>
+                          <field name="det_prevision"/>
+                          <field name="nombre"/>
+                          <field name="det_grupo_sangre"/>
+                          <field name="fecha_nac"/>
+                          <field name="edad"/>
+                         <separator string="Total" colspan="4"/>
+                          <field name="total_receta"/>
+                          <field name="total_consulta"/>
+                          <field name="total_reservap"/> 
+                        </group>
+                        <notebook>
+                        <page string="Reservas">
+                            <group>
+                                <field name="reserva_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Recetas">
+                            <group>
+                                <field name="receta_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record> 
+      
+        <record model="ir.ui.view" id="paciente_search_view">
+            <field name="name">paciente search</field>
+            <field name="model">centro.paciente</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="nombre"/>
+                    <field name="rut"/>
+                </search>
+            </field>
+        </record> -->
+
+    
+    <record id="centro_paciente_action_window2" model="ir.actions.act_window" > <!-- EDITAR ID-->
+      <field name="name"> Action Title </field>
+      <field name="res_model">centro.paciente</field>
+      <field name="view_mode">tree,form</field>
+      
+    </record>
+
+   
+    <record model="ir.actions.server" id="centro_paciente_action_server2">
+      <field name="name">paciente server</field>
+      <field name="model_id" ref="model_centro_paciente"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    
+    <menuitem name="Listado de Pacientes2" id="centro_paciente2" parent="menu_centro_3" action="centro_paciente_action_window2" 
+     groups="centro.grupo_administradores,centro.grupo_secretarias"/>
+
+  </data>
+</odoo>
+
+ 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>  
+      <menuitem name="Sin Salud S.A." id="centro_menu_root"/>
+
+    <!-- menu categories -->
+    
+    <menuitem name="Inicio" id="menu_centro" parent="centro_menu_root"/>
+
+    <menuitem name="Agenda" id="menu_centro1" parent="centro_menu_root"/>
+
+    <menuitem name="Consultas Médicas" id="menu_centro_2" parent="centro_menu_root"/>
+
+    <menuitem name="Pacientes" id="menu_centro_3" parent="centro_menu_root"/>
+
+    <menuitem name="Red de Especialistas" id="menu_centro_4" parent="centro_menu_root"/>
+    
+  </data>
+</odoo>

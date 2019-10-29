@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+        id="listado_especialista"
+        model="centro.especialista"
+        string="Reporte de Especialista"
+        name="centro.report_especialista_view"
+        file="centro.report_especialista"
+        report_type="qweb-pdf"  />
+
+
+    <template id="report_especialista_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="page">
+
+                            <style>
+                                table.customTable {
+                                width: 100%;
+                                background-color: #FFFFFF;
+                                border-collapse: collapse;
+                                border-width: 2px;
+                                border-color: #72C9F6;
+                                border-style: solid;
+                                color: #000000;
+                                }
+
+                                table.customTable td, table.customTable th {
+                                border-width: 2px;
+                                border-color: #72C9F6;
+                                border-style: solid;
+                                padding: 5px;
+                                }
+
+                                table.customTable thead {
+                                background-color: #72C9F6;
+                                font-family: sans-serif;
+                                }
+                            </style>
+                            <br></br>
+
+                            <thead>
+                                <center>
+                                    <h2>Reporte de Especialista</h2>
+                                </center>
+                                <br>
+                                    <p>Nombre:
+                                        <span t-field="o.nombre_es"/>
+                                    </p>
+                                    <p>Rut:
+                                        <span t-field="o.rut_es"/>
+                                    </p>
+                                    <p>Especialidad:
+                                        <span t-field="o.especialidad_id"/>
+                                    </p>
+                                    <p>Total de Reservas:
+                                        <span t-field="o.total_reserva"/>
+                                    </p>
+                                 <p>
+                                        <table class="customTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Paciente</th>
+                                                    <th>Fecha y Hora</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-set="i" t-value="1"/>
+                                                <tr t-foreach="o.reserva_ids" t-as="l">
+                                                    <td>
+                                                        <span t-field="l.paciente_id"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="l.fecha"/>
+                                                    </td>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </p> 
+                                </br>
+                            </thead>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

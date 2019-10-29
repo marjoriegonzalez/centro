@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       
+        <record id="grupo_administradores" model="res.groups">
+            <field name="name">Administradores</field>
+        </record>
+
+        <record id="grupo_secretarias" model="res.groups">
+            <field name="name">Secretarias</field>
+        </record>
+
+        <record id="grupo_especialistas" model="res.groups">
+            <field name="name">Especialistas</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+      
+        <record model="ir.ui.view" id="centro.tree_agenda_list">
+            <field name="name">Listado de Agenda</field>
+            <field name="model">centro.agenda</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id"/>
+                    <field name="fecha"/>
+                    <field name="descripcion"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="centro.agenda_view">
+            <field name="name">Agenda</field>
+            <field name="model">centro.agenda</field>
+            <field name="arch" type="xml">
+                <form string="agenda">
+                    <group col="4">
+                        <separator string="Ingresar Recordatorio" colspan="4"/>
+                        <field name="fecha" colspan="4"/>
+                        <field name="descripcion" colspan="4"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+       
+        <record model="ir.ui.view" id="agenda_calendar_view">
+            <field name="name"> agenda </field>
+            <field name="model">centro.agenda</field>
+            <field name="arch" type="xml">
+                <calendar string="Session Calendar" date_start="fecha">
+                </calendar>
+            </field>
+        </record>
+
+        
+        <record model="ir.ui.view" id="agenda_search_view">
+          <field name="name">agenda search</field>
+          <field name="model">centro.agenda</field>
+          <field name="arch" type="xml">
+                <search>
+                    <field name="fecha"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="centro.agenda_action_window">
+            <field name="name">Agenda Personal</field>
+            <field name="res_model">centro.agenda</field>
+            <field name="view_mode">tree,form,calendar</field>
+        </record>
+
+
+        <record model="ir.actions.server" id="centro_agenda_action_server">
+            <field name="name">Agenda Server</field>
+            <field name="model_id" ref="model_centro_agenda"/>
+            <field name="code">
+                action = {
+                "type": "ir.actions.act_window",
+                "view_mode": "tree,form",
+                "res_model": self._name,
+                }
+            </field>
+        </record>
+
+        <menuitem name="Agenda Personal" id="centro_agenda" parent="menu_centro" action="centro.agenda_action_window" 
+           groups="centro.grupo_administradores,centro.grupo_secretarias"/>
+
+    </data>
+</odoo>
