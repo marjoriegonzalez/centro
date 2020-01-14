@@ -26,7 +26,7 @@ class Agenda_especialista(models.Model):
 
 class Receta(models.Model):
     _name = 'centro.receta'
-    _rec_name = 'observacion'
+    _rec_name = 'observacion
 
     observacion = fields.Text(string="Observaciones", required=True)
     paciente_id = fields.Many2one(
