@@ -18,7 +18,9 @@ class Agenda(models.Model):
 
 class Agenda_especialista(models.Model): 
     _name = 'centro.agenda_especialista'
-    _rec_name = 'desc
+    _rec_name = 'descripcion'
+    
+    fecha = fields.DataTime (string ="Fecha de la reserva", required = True)
     descripcion = fields.Text(string='Descripción', required=True)
 
 
