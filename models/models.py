@@ -18,9 +18,7 @@ class Agenda(models.Model):
 
 class Agenda_especialista(models.Model): 
     _name = 'centro.agenda_especialista'
-    _rec_name = 'descripcion'
-    
-    fecha = fields.Datetime(string='Fecha y hora', required=True)
+    _rec_name = 'desc
     descripcion = fields.Text(string='Descripción', required=True)
 
 
