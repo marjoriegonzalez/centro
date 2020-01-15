@@ -8,7 +8,12 @@ from datetime import date
 
 class Agenda(models.Model): 
     _name = 'centro.agenda'
-    _rec_name = 'descripcio
+    _rec_name = 'descripcion'
+    
+    fecha = fields.Datetime(string='Fecha y hora', required=True)
+    descripcion = fields.Text(string='Descripción', required=True)
+    descripcion1 = fields.Text(string='Descripción1', required=True)
+    descripcion2 = fields.Text(string='Descripción2', required=True)
 
 
 class Agenda_especialista(models.Model): 
